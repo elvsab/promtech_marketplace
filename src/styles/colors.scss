@@ -1,0 +1,54 @@
+// Global Color Variables for PromTech Marketplace
+
+// Primary Prom Colors
+$prom-50: #f8fafc;
+$prom-100: #f1f5f9;
+$prom-200: #e2e8f0;
+$prom-300: #cbd5e1;
+$prom-400: #94a3b8;
+$prom-500: #64748b;
+$prom-600: #475569;
+$prom-700: #334155;
+$prom-800: #1e293b;
+$prom-900: #0f172a;
+
+// Accent Colors
+$prom-orange: #ea580c;
+$orange-700: #c2410c;
+
+// Semantic Colors
+$white: #ffffff;
+$black: #000000;
+$black-overlay: rgba(0, 0, 0, 0.4);
+
+// Status Colors
+$red-50: #fef2f2;
+$red-100: #fee2e2;
+$red-200: #fecaca;
+$red-300: #fca5a5;
+$red-600: #dc2626;
+$red-700: #b91c1c;
+
+// Blue Colors (for badges)
+$blue-50: #eff6ff;
+$blue-100: #dbeafe;
+$blue-700: #1d4ed8;
+
+// Export for use in other SCSS files
+:export {
+  prom50: $prom-50;
+  prom100: $prom-100;
+  prom200: $prom-200;
+  prom300: $prom-300;
+  prom400: $prom-400;
+  prom500: $prom-500;
+  prom600: $prom-600;
+  prom700: $prom-700;
+  prom800: $prom-800;
+  prom900: $prom-900;
+  promOrange: $prom-orange;
+  orange700: $orange-700;
+  white: $white;
+  black: $black;
+}
+

@@ -1,0 +1,78 @@
+@import 'colors';
+@import 'fonts';
+@import 'components/Header';
+@import 'components/Sidebar';
+@import 'components/ProductCard';
+@import 'components/Footer';
+@import 'components/Dashboard';
+@import 'components/DesignSystem';
+@import 'components/Modal';
+@import 'components/AuthModal';
+@import 'components/AddProductModal';
+
+// Global Styles
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $prom-50;
+  font-family: $font-family-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Custom Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $prom-100;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $prom-300;
+  border-radius: 4px;
+
+  &:hover {
+    background: $prom-400;
+  }
+}
+
+// Utility Classes
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

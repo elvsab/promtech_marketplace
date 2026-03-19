@@ -1,0 +1,327 @@
+@import '../colors';
+@import '../fonts';
+
+.add-product-modal {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background-color: $prom-50;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  border: none;
+  color: $prom-400;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: $prom-100;
+    color: $prom-800;
+  }
+}
+
+.modal-header-section {
+  background-color: $prom-50;
+  padding: 2rem;
+  border-bottom: 1px solid $prom-100;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: $white;
+  border-radius: 9999px;
+  color: $prom-orange;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid $prom-100;
+}
+
+.modal-title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $prom-900;
+  margin: 0 0 0.25rem 0;
+}
+
+.modal-subtitle {
+  color: $prom-500;
+  font-size: $font-size-sm;
+  margin: 0;
+}
+
+.form-error {
+  margin: 1.5rem 2rem 0;
+  padding: 0.75rem 1rem;
+  background-color: $red-50;
+  border: 1px solid $red-200;
+  border-radius: 0.375rem;
+  color: $red-700;
+  font-size: $font-size-sm;
+}
+
+.product-form {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $prom-700;
+}
+
+.form-hint {
+  font-size: $font-size-xs;
+  color: $prom-500;
+  margin-top: 0.25rem;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  padding: 0.75rem;
+  border: 1px solid $prom-300;
+  border-radius: 0.375rem;
+  font-size: $font-size-base;
+  color: $prom-900;
+  transition: all 0.2s;
+  font-family: $font-family-base;
+
+  &:focus {
+    outline: none;
+    border-color: $prom-orange;
+    box-shadow: 0 0 0 3px rgba($prom-orange, 0.1);
+  }
+
+  &::placeholder {
+    color: $prom-400;
+  }
+
+  &:disabled {
+    background-color: $prom-50;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.form-select {
+  background-color: $white;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+
+  &:disabled {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  }
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.specs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.add-spec-button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background-color: $prom-100;
+  border: 1px solid $prom-200;
+  border-radius: 0.375rem;
+  color: $prom-700;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: $prom-200;
+    border-color: $prom-300;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.spec-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.spec-key-input,
+.spec-value-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid $prom-300;
+  border-radius: 0.375rem;
+  font-size: $font-size-sm;
+  color: $prom-900;
+  transition: all 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: $prom-orange;
+    box-shadow: 0 0 0 3px rgba($prom-orange, 0.1);
+  }
+
+  &::placeholder {
+    color: $prom-400;
+  }
+
+  &:disabled {
+    background-color: $prom-50;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.spec-key-input {
+  flex: 0 0 40%;
+}
+
+.spec-value-input {
+  flex: 0 0 50%;
+}
+
+.remove-spec-button {
+  flex: 0 0 auto;
+  padding: 0.5rem;
+  background-color: $red-50;
+  border: 1px solid $red-200;
+  border-radius: 0.375rem;
+  color: $red-700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    background-color: $red-100;
+    border-color: $red-300;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $prom-200;
+}
+
+.cancel-button {
+  padding: 0.75rem 1.5rem;
+  background-color: $white;
+  border: 1px solid $prom-300;
+  border-radius: 0.375rem;
+  color: $prom-700;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: $prom-50;
+    border-color: $prom-400;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.submit-button {
+  padding: 0.75rem 1.5rem;
+  background-color: $prom-orange;
+  color: $white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba($prom-orange, 0.2);
+
+  &:hover:not(:disabled) {
+    background-color: $orange-700;
+    box-shadow: 0 6px 8px -1px rgba($prom-orange, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

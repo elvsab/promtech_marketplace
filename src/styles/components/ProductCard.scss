@@ -1,0 +1,258 @@
+@import '../colors';
+@import '../fonts';
+
+.product-card {
+  background-color: $white;
+  border-radius: 0.5rem;
+  border: 1px solid $prom-200;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $prom-400;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    
+    // Показываем иконки действий при наведении
+    .action-icons {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // Action Icons (в левом верхнем углу, появляются при наведении)
+  .action-icons {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+  }
+
+  .action-icon {
+    background-color: rgba($white, 0.95);
+    backdrop-filter: blur(4px);
+    border: 1px solid $prom-200;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $prom-600;
+
+    &:hover {
+      background-color: $white;
+      border-color: $prom-400;
+      color: $prom-800;
+      transform: scale(1.05);
+    }
+
+    &.active {
+      color: $prom-orange;
+      border-color: $prom-orange;
+      background-color: rgba($prom-orange, 0.1);
+    }
+
+    .tooltip {
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 0.5rem;
+      background-color: $prom-800;
+      color: $white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.25rem;
+      font-size: $font-size-xs;
+      white-space: nowrap;
+      z-index: 20;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+      &::before {
+        content: '';
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 4px solid transparent;
+        border-right-color: $prom-800;
+      }
+    }
+  }
+
+  .image-container {
+    position: relative;
+    height: 14rem;
+    background-color: $prom-100;
+    overflow: hidden;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+
+    .product-card:hover & {
+      transform: scale(1.05);
+    }
+  }
+
+  .status-badge {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: rgba($white, 0.9);
+    backdrop-filter: blur(4px);
+    color: $prom-800;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid $prom-200;
+  }
+
+  .content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .category-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $prom-400; // Серый цвет для категории (более нейтральный серый)
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wider;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $prom-900;
+    margin-bottom: 0.5rem;
+    line-height: $line-height-tight;
+    transition: color 0.2s;
+    // Ограничение на 2-3 строки
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .product-card:hover & {
+      color: $prom-orange;
+    }
+  }
+
+  .product-model {
+    font-family: 'Courier New', 'Monaco', 'Menlo', monospace; // Моноширинный шрифт
+    font-size: $font-size-sm;
+    color: $prom-600;
+    margin-bottom: 0.5rem;
+    font-weight: $font-weight-medium;
+  }
+
+  .product-description {
+    font-size: $font-size-sm;
+    color: $prom-600;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .specs-container {
+    position: relative;
+    margin-bottom: 1rem;
+    background-color: $prom-50;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: $font-size-xs;
+    color: $prom-700;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px solid $prom-100;
+    max-height: 150px; // Максимальная высота для прокрутки
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    // Стилизация скроллбара
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: $prom-100;
+      border-radius: 2px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $prom-300;
+      border-radius: 2px;
+      
+      &:hover {
+        background: $prom-400;
+      }
+    }
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .spec-key {
+    color: $prom-500;
+  }
+
+  .spec-value {
+    font-weight: $font-weight-medium;
+  }
+
+  .request-quote-button {
+    margin-top: auto;
+    width: 100%;
+    background-color: $prom-800;
+    color: $white;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+
+    &:hover {
+      background-color: $prom-700;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+

@@ -1,0 +1,95 @@
+@import 'colors';
+@import 'fonts';
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $prom-50;
+  font-family: $font-family-base;
+  color: $prom-900;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  gap: 2rem;
+  width: 100%;
+}
+
+.shop-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.shop-header {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shop-title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $prom-800;
+  margin: 0;
+}
+
+.products-count {
+  font-size: $font-size-sm;
+  color: $prom-500;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  // Планшеты (640px+): 2 колонки
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // Ноутбуки (1366px+): 3 колонки (лучше 3 широких, чем 4 узких)
+  @media (min-width: 1366px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  // Full HD мониторы (1920px+): 5 колонок
+  @media (min-width: 1920px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 5rem 1rem;
+  background-color: $white;
+  border-radius: 0.5rem;
+  border: 1px solid $prom-200;
+}
+
+.empty-message {
+  color: $prom-400;
+  font-size: $font-size-lg;
+  margin-bottom: 1rem;
+}
+
+.reset-filters-button {
+  margin-top: 1rem;
+  color: $prom-orange;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-base;
+  transition: text-decoration 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+

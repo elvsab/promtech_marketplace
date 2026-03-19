@@ -1,0 +1,26 @@
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
+
+# PromTech Marketplace
+
+Учебный pet-проект маркетплейса промышленного оборудования на `React + TypeScript + Vite`.
+Проект демонстрирует витрину каталога, поиск, категории, личный кабинет продавца и базовую интеграцию с backend API.
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. При необходимости укажите `VITE_API_BASE_URL` в `.env.local`
+3. Run the app:
+   `npm run dev`
+
+## Planned Improvements
+
+- Модальное окно выбора группы для массового добавления товаров в подборки.
+- Более полный сценарий запроса коммерческого предложения и связи с продавцом.
+- Расширенная статистика по группам товаров на основе статусов публикации.
+- Улучшение кабинета продавца: корзина действий, настройки и серверная синхронизация.
