@@ -26,8 +26,8 @@ jobs:
 
       - name: Build and Push Frontend Image
         run: |
-          docker build -t europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-app-repo/frontend:latest .
-          docker push europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-app-repo/frontend:latest
+          docker build -t europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/market-service-app/frontend:latest -f Dockerfile_market_frontend .
+          docker push europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/market-service-app/frontend:latest
 
       - name: Deploy on VM
         uses: appleboy/ssh-action@v1.0.3
@@ -38,6 +38,6 @@ jobs:
           script: |
             cd /home/${{ secrets.VM_USER }}/app
             gcloud auth configure-docker europe-west3-docker.pkg.dev -q
-            docker compose pull frontend
-            docker compose up -d frontend
+            docker compose pull market_frontend
+            docker compose up -d market_frontend
             docker image prune -f
