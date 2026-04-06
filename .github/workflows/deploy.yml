@@ -57,6 +57,6 @@ jobs:
             docker compose up -d
             docker image prune -f
           env:
-            GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-            GCP_PROJECT_NAME: ${{ secrets.GCP_PROJECT_NAME }}
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GCP_PROJECT_NAME: ${{ secrets.GCP_PROJECT_NAME }}
             
