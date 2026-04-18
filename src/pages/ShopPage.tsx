@@ -8,9 +8,10 @@ import '../styles/App.scss';
 
 interface ShopPageProps {
   categories: ReturnType<typeof import('../hooks').useCategories>;
+  onLoginRequired?: () => void;
 }
 
-export const ShopPage: React.FC<ShopPageProps> = ({ categories }) => {
+export const ShopPage: React.FC<ShopPageProps> = ({ categories, onLoginRequired }) => {
   const dispatch = useAppDispatch();
   const searchState = useAppSelector((state) => state.search);
   const categoriesState = useAppSelector((state) => state.categories);
@@ -123,6 +124,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ categories }) => {
                   onRequestQuote={handleRequestQuote}
                   onToggleFavorite={handleToggleFavorite}
                   onToggleCompare={handleToggleCompare}
+                  onLoginRequired={onLoginRequired}
                   isFavorite={favorites.has(product.id)}
                   isInCompare={compareList.has(product.id)}
                 />

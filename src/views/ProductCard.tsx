@@ -10,6 +10,7 @@ interface ProductCardProps {
   onRequestQuote?: (product: Product) => void;
   onToggleFavorite?: (product: Product) => void;
   onToggleCompare?: (product: Product) => void;
+  onLoginRequired?: () => void;
   isFavorite?: boolean;
   isInCompare?: boolean;
 }
@@ -20,6 +21,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onRequestQuote,
   onToggleFavorite,
   onToggleCompare,
+  onLoginRequired,
   isFavorite = false,
   isInCompare = false
 }) => {
@@ -44,6 +46,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleCompareClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!isLoggedIn) {
+      onLoginRequired?.();
+      return;
+    }
     onToggleCompare?.(product);
   };
 
@@ -69,16 +75,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </button>
         
         <button
-          className={`action-icon compare-icon ${isInCompare ? 'active' : ''} ${!isLoggedIn ? 'disabled' : ''}`}
+          className={`action-icon compare-icon ${isInCompare ? 'active' : ''}`}
           onClick={handleCompareClick}
           onMouseEnter={() => setShowTooltip({ ...showTooltip, compare: true })}
           onMouseLeave={() => setShowTooltip({ ...showTooltip, compare: false })}
           aria-label="Добавить к сравнению"
-          disabled={!isLoggedIn}
         >
           <GitCompare size={20} />
           {showTooltip.compare && (
-            <span className="tooltip">{isLoggedIn ? 'Добавить к сравнению' : 'Войдите для сравнения'}</span>
+            <span className="tooltip">Добавить к сравнению</span>
           )}
         </button>
       </div>

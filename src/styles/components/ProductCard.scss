@@ -65,20 +65,6 @@
       background-color: rgba($prom-orange, 0.1);
     }
 
-    &.disabled,
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      pointer-events: auto;
-
-      &:hover {
-        transform: none;
-        background-color: rgba($white, 0.95);
-        border-color: $prom-200;
-        color: $prom-600;
-      }
-    }
-
     .tooltip {
       position: absolute;
       left: 100%;
