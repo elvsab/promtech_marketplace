@@ -41,6 +41,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!isLoggedIn) {
+      onLoginRequired?.();
+      return;
+    }
     onToggleFavorite?.(product);
   };
 
