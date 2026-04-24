@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Product } from '../models';
 import { Heart, GitCompare } from 'lucide-react';
+import { useAuth } from '../hooks';
 import '../styles/components/ProductCard.scss';
 
 interface ProductCardProps {
@@ -9,6 +10,7 @@ interface ProductCardProps {
   onRequestQuote?: (product: Product) => void;
   onToggleFavorite?: (product: Product) => void;
   onToggleCompare?: (product: Product) => void;
+  onLoginRequired?: () => void;
   isFavorite?: boolean;
   isInCompare?: boolean;
 }
@@ -19,9 +21,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onRequestQuote,
   onToggleFavorite,
   onToggleCompare,
+  onLoginRequired,
   isFavorite = false,
   isInCompare = false
 }) => {
+  const { isLoggedIn } = useAuth();
   const [showTooltip, setShowTooltip] = useState<{ favorite: boolean; compare: boolean }>({
     favorite: false,
     compare: false
@@ -37,11 +41,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!isLoggedIn) {
+      onLoginRequired?.();
+      return;
+    }
     onToggleFavorite?.(product);
   };
 
   const handleCompareClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!isLoggedIn) {
+      onLoginRequired?.();
+      return;
+    }
     onToggleCompare?.(product);
   };
 

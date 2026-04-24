@@ -166,7 +166,7 @@ function AppContent() {
       />
 
       <Routes>
-        <Route path="/" element={<ShopPage categories={categories} />} />
+        <Route path="/" element={<ShopPage categories={categories} onLoginRequired={() => setIsAuthModalOpen(true)} />} />
         <Route path="/design-system" element={<DesignSystemPage />} />
         <Route 
           path="/dashboard" 

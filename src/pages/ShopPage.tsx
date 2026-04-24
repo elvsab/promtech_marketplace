@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ProductCard, ProductModal } from '../views';
+import { ProductCard, ProductModal, RelatedProducts } from '../views';
 import { ShopPresenter } from '../presenters';
 import { useAppDispatch, useAppSelector } from '../store';
 import { searchProducts, resetFilters } from '../store';
@@ -8,9 +8,10 @@ import '../styles/App.scss';
 
 interface ShopPageProps {
   categories: ReturnType<typeof import('../hooks').useCategories>;
+  onLoginRequired?: () => void;
 }
 
-export const ShopPage: React.FC<ShopPageProps> = ({ categories }) => {
+export const ShopPage: React.FC<ShopPageProps> = ({ categories, onLoginRequired }) => {
   const dispatch = useAppDispatch();
   const searchState = useAppSelector((state) => state.search);
   const categoriesState = useAppSelector((state) => state.categories);
@@ -78,6 +79,12 @@ export const ShopPage: React.FC<ShopPageProps> = ({ categories }) => {
 
   return (
     <div className="main-content">
+      <RelatedProducts
+        products={searchState.products}
+        currentProducts={searchState.filteredProducts}
+        searchQuery={searchState.searchQuery}
+        onProductClick={handleCardClick}
+      />
       <main className="shop-main">
         <div className="shop-header">
           <button 
@@ -123,6 +130,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ categories }) => {
                   onRequestQuote={handleRequestQuote}
                   onToggleFavorite={handleToggleFavorite}
                   onToggleCompare={handleToggleCompare}
+                  onLoginRequired={onLoginRequired}
                   isFavorite={favorites.has(product.id)}
                   isInCompare={compareList.has(product.id)}
                 />

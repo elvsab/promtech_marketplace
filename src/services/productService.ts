@@ -1,5 +1,15 @@
 import { apiService } from './apiService';
-import { Product, Category, ApiProduct, ProductCreatePayload, ProductUpdatePayload, ProductUpdateResponse } from '../models';
+import { Product, Category, ApiProduct, ProductCreatePayload, ProductUpdatePayload, ProductUpdateResponse, PRODUCTS } from '../models';
+
+// Локальное хранилище для mock товаров продавца
+let mockSellerProducts: Product[] = [];
+let mockProductIdCounter = 1000;
+
+// Проверка, используется ли mock режим
+const isMockMode = (): boolean => {
+  const token = localStorage.getItem('auth_token');
+  return !token || token.startsWith('mock_token_');
+};
 
 // Маппинг API продукта в внутренний формат
 const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
@@ -109,11 +119,31 @@ const loadSellerProducts = async (sellerId: number, page: number = 1, limit: num
   }
 };
 
+// Функция для получения всех mock товаров (включая товары продавца)
+const getMockProducts = (): Product[] => {
+  // Объединяем статические товары из PRODUCTS и динамические mock товары продавца
+  return [...PRODUCTS, ...mockSellerProducts];
+};
+
 // Product API endpoints (без префикса /api/)
 export const productService = {
   // Search products
   // Пробуем оба формата: /search?q={query} (query param) и /search/{query} (path param)
   async getProducts(searchQuery?: string): Promise<Product[]> {
+    // В mock режиме используем локальные данные
+    if (isMockMode()) {
+      const allProducts = getMockProducts();
+      if (searchQuery && searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        return allProducts.filter(p => 
+          p.name.toLowerCase().includes(query) ||
+          p.description.toLowerCase().includes(query) ||
+          (p.article && p.article.toLowerCase().includes(query))
+        );
+      }
+      return allProducts;
+    }
+    
     try {
       if (searchQuery && searchQuery.trim()) {
         const trimmedQuery = searchQuery.trim();
@@ -226,6 +256,21 @@ export const productService = {
 
   // Create product (token в заголовке Authorization)
   async createProduct(product: Omit<Product, 'id'>): Promise<Product> {
+    // В mock режиме сохраняем локально
+    if (isMockMode()) {
+      const newProduct: Product = {
+        ...product,
+        id: String(++mockProductIdCounter),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        status: 'draft',
+        imageUrl: product.imageUrl || `https://picsum.photos/400/300?random=${mockProductIdCounter}`,
+      };
+      mockSellerProducts.push(newProduct);
+      console.log('[productService] Mock: создан товар', newProduct);
+      return newProduct;
+    }
+    
     // Добавляем артикул, категорию и подкатегорию в specs для отправки на API
     const specsWithMeta: Record<string, string> = { ...product.specs };
     if (product.article) {
@@ -251,6 +296,21 @@ export const productService = {
 
   // Update product (token в заголовке Authorization)
   async updateProduct(id: string, product: Partial<Product>): Promise<Product> {
+    // В mock режиме обновляем локально
+    if (isMockMode()) {
+      const index = mockSellerProducts.findIndex(p => p.id === id);
+      if (index >= 0) {
+        mockSellerProducts[index] = {
+          ...mockSellerProducts[index],
+          ...product,
+          updatedAt: new Date().toISOString(),
+        };
+        console.log('[productService] Mock: обновлен товар', mockSellerProducts[index]);
+        return mockSellerProducts[index];
+      }
+      throw new Error('Товар не найден');
+    }
+    
     const payload = mapProductToApiPayload(product);
     const response = await apiService.put<ProductUpdateResponse>(`/products/${id}`, payload, false, false);
     return mapApiProductToProduct(response.product);
@@ -258,6 +318,17 @@ export const productService = {
 
   // Delete product (token в заголовке Authorization)
   async deleteProduct(id: string): Promise<void> {
+    // В mock режиме удаляем локально
+    if (isMockMode()) {
+      const index = mockSellerProducts.findIndex(p => p.id === id);
+      if (index >= 0) {
+        mockSellerProducts.splice(index, 1);
+        console.log('[productService] Mock: удален товар', id);
+        return;
+      }
+      throw new Error('Товар не найден');
+    }
+    
     try {
       await apiService.delete(`/products/${id}`, false, false);
     } catch (error: any) {
@@ -270,6 +341,12 @@ export const productService = {
 
   // Get seller products (with pagination support)
   async getSellerProducts(sellerId: string | number, page: number = 1, limit: number = 100): Promise<Product[]> {
+    // В mock режиме возвращаем локальные товары
+    if (isMockMode()) {
+      console.log('[productService] Mock: возвращаем локальные товары продавца, количество:', mockSellerProducts.length);
+      return mockSellerProducts;
+    }
+    
     try {
       // API требует числовой seller_id, поэтому преобразуем ID в число
       // Для mock пользователей используем фиксированный ID для разработки (можно изменить на нужный)

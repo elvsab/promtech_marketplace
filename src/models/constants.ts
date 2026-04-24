@@ -249,5 +249,131 @@ export const PRODUCTS: Product[] = [
     model: 'NORDAIR-NA-30',
     availability: 'on_order',
     daysToDelivery: 14
+  },
+  {
+    id: '10',
+    name: 'Подшипник шариковый SKF 6205-2RS',
+    category: 'parts-components',
+    subcategory: 'Подшипники',
+    description: 'Радиальный шариковый подшипник с двухсторонним уплотнением. Идеален для электродвигателей, насосов и станков.',
+    price: 850,
+    imageUrl: 'https://picsum.photos/400/300?random=10',
+    specs: {
+      'Внутренний диаметр': '25 мм',
+      'Внешний диаметр': '52 мм',
+      'Ширина': '15 мм'
+    },
+    article: 'SKF-6205-2RS',
+    model: '6205-2RS',
+    availability: 'in_stock',
+    stock: 150
+  },
+  {
+    id: '11',
+    name: 'Редуктор червячный NMRV-063',
+    category: 'parts-components',
+    subcategory: 'Редукторы',
+    description: 'Червячный редуктор для конвейеров, смесителей и упаковочного оборудования. Компактный корпус из алюминиевого сплава.',
+    price: 12500,
+    imageUrl: 'https://picsum.photos/400/300?random=11',
+    specs: {
+      'Передаточное число': '1:40',
+      'Крутящий момент': '84 Нм',
+      'Мощность': '0.75 кВт'
+    },
+    article: 'NMRV063-40',
+    model: 'NMRV-063',
+    availability: 'in_stock',
+    stock: 25
+  },
+  {
+    id: '12',
+    name: 'Электродвигатель АИР 100L4',
+    category: 'electrical',
+    subcategory: 'Электродвигатели',
+    description: 'Асинхронный трёхфазный электродвигатель общепромышленного назначения. Подходит для насосов, вентиляторов и станков.',
+    price: 18500,
+    imageUrl: 'https://picsum.photos/400/300?random=12',
+    specs: {
+      'Мощность': '4 кВт',
+      'Обороты': '1500 об/мин',
+      'Напряжение': '380 В'
+    },
+    article: 'AIR-100L4',
+    model: 'АИР 100L4',
+    availability: 'in_stock',
+    stock: 8
+  },
+  {
+    id: '13',
+    name: 'Координатно-измерительная машина CMM-500',
+    category: 'measurement-control',
+    subcategory: 'Контрольно-измерительные приборы (КИП)',
+    description: 'Портальная КИМ для высокоточного контроля геометрии деталей. Интегрируется с CAD/CAM системами.',
+    price: 3200000,
+    imageUrl: 'https://picsum.photos/400/300?random=13',
+    specs: {
+      'Диапазон измерений': '500x400x300 мм',
+      'Точность': '2.5 мкм',
+      'Повторяемость': '1.5 мкм'
+    },
+    article: 'CMM-500-PRO',
+    model: 'CMM-500',
+    availability: 'on_order',
+    daysToDelivery: 30
+  },
+  {
+    id: '14',
+    name: 'Ленточный конвейер TransBelt 600',
+    category: 'conveyors-lifting',
+    subcategory: 'Ленточные и роликовые конвейеры',
+    description: 'Модульный ленточный конвейер для транспортировки сыпучих и штучных грузов. Регулируемая скорость и наклон.',
+    price: 185000,
+    imageUrl: 'https://picsum.photos/400/300?random=14',
+    specs: {
+      'Ширина ленты': '600 мм',
+      'Длина': '6 м',
+      'Грузоподъёмность': '50 кг/м'
+    },
+    article: 'TB-600-6M',
+    model: 'TRANSBELT-600',
+    availability: 'in_stock',
+    stock: 3
+  },
+  {
+    id: '15',
+    name: 'Промышленный робот-манипулятор RoboArm 6-axis',
+    category: 'cnc-automation',
+    subcategory: 'Промышленные роботы',
+    description: 'Шестиосевой робот для сварки, паллетирования и обслуживания станков. Высокая точность позиционирования.',
+    price: 4500000,
+    imageUrl: 'https://picsum.photos/400/300?random=15',
+    specs: {
+      'Грузоподъёмность': '20 кг',
+      'Радиус действия': '1850 мм',
+      'Повторяемость': '±0.05 мм'
+    },
+    article: 'RA-6AX-20',
+    model: 'ROBOARM-6AXIS',
+    availability: 'on_order',
+    daysToDelivery: 45
+  },
+  {
+    id: '16',
+    name: 'Фрезерный станок с ЧПУ MillPro 800',
+    category: 'machinery',
+    subcategory: 'Фрезерные станки',
+    description: 'Вертикальный фрезерный станок для обработки металлов и пластиков. Оснащён системой охлаждения и автоматической сменой инструмента.',
+    price: 2100000,
+    imageUrl: 'https://picsum.photos/400/300?random=16',
+    specs: {
+      'Рабочий стол': '800x400 мм',
+      'Шпиндель': '8000 об/мин',
+      'Мощность': '7.5 кВт'
+    },
+    article: 'MP-800-CNC',
+    model: 'MILLPRO-800',
+    availability: 'in_stock',
+    stock: 1
   }
 ];

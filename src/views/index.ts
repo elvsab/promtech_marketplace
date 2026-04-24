@@ -9,3 +9,4 @@ export * from './AuthModal';
 export * from './AddProductModal';
 export * from './DashboardSidebar';
 export * from './DashboardLayout';
+export * from './RelatedProducts';
