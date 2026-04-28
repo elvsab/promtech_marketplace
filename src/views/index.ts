@@ -10,3 +10,4 @@ export * from './AddProductModal';
 export * from './DashboardSidebar';
 export * from './DashboardLayout';
 export * from './RelatedProducts';
+export * from './DynamicFilters';

@@ -375,5 +375,131 @@ export const PRODUCTS: Product[] = [
     model: 'MILLPRO-800',
     availability: 'in_stock',
     stock: 1
+  },
+  {
+    id: '17',
+    name: 'Токарный станок с ЧПУ TurnMaster 400',
+    category: 'machinery',
+    subcategory: 'Токарные станки',
+    description: 'Компактный токарный станок с числовым программным управлением для мелкосерийного производства.',
+    price: 980000,
+    imageUrl: 'https://picsum.photos/400/300?random=17',
+    specs: {
+      'Мощность': '7.5 кВт',
+      'Вес': '1800 кг',
+      'ЧПУ': 'Siemens'
+    },
+    article: 'TM-400-CNC',
+    model: 'TURNMASTER-400',
+    availability: 'in_stock',
+    stock: 3
+  },
+  {
+    id: '18',
+    name: 'Токарный станок универсальный УТС-250',
+    category: 'machinery',
+    subcategory: 'Токарные станки',
+    description: 'Универсальный токарный станок для учебных заведений и мастерских. Простое управление.',
+    price: 320000,
+    imageUrl: 'https://picsum.photos/400/300?random=18',
+    specs: {
+      'Мощность': '3 кВт',
+      'Вес': '850 кг',
+      'ЧПУ': 'Нет'
+    },
+    article: 'UTS-250',
+    model: 'УТС-250',
+    availability: 'in_stock',
+    stock: 7
+  },
+  {
+    id: '19',
+    name: 'Фрезерный станок вертикальный ВФС-500',
+    category: 'machinery',
+    subcategory: 'Фрезерные станки',
+    description: 'Вертикальный фрезерный станок для обработки плоских и фасонных поверхностей.',
+    price: 450000,
+    imageUrl: 'https://picsum.photos/400/300?random=19',
+    specs: {
+      'Рабочий стол': '500x200 мм',
+      'Шпиндель': '3000 об/мин',
+      'Мощность': '3 кВт'
+    },
+    article: 'VFS-500',
+    model: 'ВФС-500',
+    availability: 'in_stock',
+    stock: 4
+  },
+  {
+    id: '20',
+    name: 'Шлифовальный станок плоскошлифовальный ПШС-300',
+    category: 'machinery',
+    subcategory: 'Шлифовальные',
+    description: 'Плоскошлифовальный станок для финишной обработки плоских поверхностей деталей.',
+    price: 680000,
+    imageUrl: 'https://picsum.photos/400/300?random=20',
+    specs: {
+      'Мощность': '5.5 кВт',
+      'Вес': '2200 кг',
+      'Точность': '0.005 мм'
+    },
+    article: 'PSS-300',
+    model: 'ПШС-300',
+    availability: 'on_order',
+    daysToDelivery: 21
+  },
+  {
+    id: '21',
+    name: 'Токарный станок с ЧПУ HeavyTurn 600',
+    category: 'machinery',
+    subcategory: 'Токарные станки',
+    description: 'Тяжёлый токарный станок для обработки крупногабаритных деталей с высокой точностью.',
+    price: 2800000,
+    imageUrl: 'https://picsum.photos/400/300?random=21',
+    specs: {
+      'Мощность': '22 кВт',
+      'Вес': '5500 кг',
+      'ЧПУ': 'Fanuc'
+    },
+    article: 'HT-600-CNC',
+    model: 'HEAVYTURN-600',
+    availability: 'on_order',
+    daysToDelivery: 30
+  },
+  {
+    id: '22',
+    name: 'Сверлильный станок радиальный РС-50',
+    category: 'machinery',
+    subcategory: 'Сверлильные и расточные',
+    description: 'Радиально-сверлильный станок для сверления отверстий в крупных деталях.',
+    price: 520000,
+    imageUrl: 'https://picsum.photos/400/300?random=22',
+    specs: {
+      'Мощность': '4 кВт',
+      'Вес': '1600 кг',
+      'Макс. диаметр сверления': '50 мм'
+    },
+    article: 'RS-50',
+    model: 'РС-50',
+    availability: 'in_stock',
+    stock: 2
+  },
+  {
+    id: '23',
+    name: 'Ленточнопильный станок BS-300',
+    category: 'machinery',
+    subcategory: 'Лазерная, плазменная и гидроабразивная резка',
+    description: 'Ленточнопильный станок для резки металлопроката различного сечения.',
+    price: 185000,
+    imageUrl: 'https://picsum.photos/400/300?random=23',
+    specs: {
+      'Мощность': '1.5 кВт',
+      'Вес': '450 кг',
+      'Макс. диаметр резки': '300 мм'
+    },
+    article: 'BS-300',
+    model: 'BS-300',
+    availability: 'in_stock',
+    stock: 5
   }
 ];

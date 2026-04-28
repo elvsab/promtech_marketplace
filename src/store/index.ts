@@ -29,6 +29,8 @@ export {
   setSortBy,
   setPage,
   resetFilters,
+  setSpecFilter,
+  clearSpecFilters,
   setProducts,
   addProduct as addSearchProduct,
   updateProduct as updateSearchProduct,

@@ -8,12 +8,14 @@ export interface SearchFilters {
   subcategory?: string | null;
   minPrice?: number;
   maxPrice?: number;
-  [key: string]: any; // Для динамических фильтров
+  specFilters?: Record<string, string[]>; // Фильтры по характеристикам
+  [key: string]: any; // Для других динамических фильтров
 }
 
 interface SearchState {
   products: Product[];
   filteredProducts: Product[];
+  preSpecFilteredProducts: Product[]; // Товары до применения spec фильтров (для показа доступных фильтров)
   searchQuery: string;
   filters: SearchFilters;
   sortBy: 'relevance' | 'price_asc' | 'price_desc' | 'newest';
@@ -28,6 +30,7 @@ interface SearchState {
 const initialState: SearchState = {
   products: PRODUCTS,
   filteredProducts: PRODUCTS,
+  preSpecFilteredProducts: PRODUCTS,
   searchQuery: '',
   filters: {},
   sortBy: 'relevance',
@@ -95,6 +98,24 @@ const searchSlice = createSlice({
       state.filters = {};
       state.currentPage = 1;
       state.sortBy = 'relevance';
+      applyFilters(state);
+    },
+    setSpecFilter: (state, action: PayloadAction<{ specName: string; values: string[] }>) => {
+      const { specName, values } = action.payload;
+      if (!state.filters.specFilters) {
+        state.filters.specFilters = {};
+      }
+      if (values.length === 0) {
+        delete state.filters.specFilters[specName];
+      } else {
+        state.filters.specFilters[specName] = values;
+      }
+      state.currentPage = 1;
+      applyFilters(state);
+    },
+    clearSpecFilters: (state) => {
+      state.filters.specFilters = {};
+      state.currentPage = 1;
       applyFilters(state);
     },
     setProducts: (state, action: PayloadAction<Product[]>) => {
@@ -239,6 +260,29 @@ function applyFilters(state: SearchState) {
     result = result.filter(p => p.price <= state.filters.maxPrice!);
   }
 
+  // Сохраняем товары ДО применения spec фильтров (для отображения доступных фильтров)
+  state.preSpecFilteredProducts = result;
+
+  // Фильтр по характеристикам (specs)
+  if (state.filters.specFilters && Object.keys(state.filters.specFilters).length > 0) {
+    const beforeSpecFilter = result.length;
+    result = result.filter(product => {
+      if (!product.specs) return false;
+      
+      // Товар должен соответствовать ВСЕМ выбранным фильтрам (AND логика между разными specs)
+      // Но внутри одного spec - OR логика (любое из выбранных значений)
+      return Object.entries(state.filters.specFilters!).every(([specName, allowedValues]) => {
+        if (!allowedValues || allowedValues.length === 0) return true;
+        const productValue = product.specs[specName];
+        return productValue && allowedValues.includes(productValue);
+      });
+    });
+    
+    if (import.meta.env.DEV) {
+      console.log(`[applyFilters] После фильтра по характеристикам: ${result.length} из ${beforeSpecFilter}`);
+    }
+  }
+
   // Сортировка
   switch (state.sortBy) {
     case 'price_asc':
@@ -275,6 +319,8 @@ export const {
   setSortBy,
   setPage,
   resetFilters,
+  setSpecFilter,
+  clearSpecFilters,
   setProducts,
   addProduct,
   updateProduct,

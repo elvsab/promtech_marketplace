@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ProductCard, ProductModal, RelatedProducts } from '../views';
+import { ProductCard, ProductModal, DynamicFilters } from '../views';
 import { ShopPresenter } from '../presenters';
 import { useAppDispatch, useAppSelector } from '../store';
-import { searchProducts, resetFilters } from '../store';
+import { searchProducts, resetFilters, setSpecFilter, clearSpecFilters } from '../store';
 import { Product } from '../models';
 import '../styles/App.scss';
 
@@ -79,11 +79,11 @@ export const ShopPage: React.FC<ShopPageProps> = ({ categories, onLoginRequired 
 
   return (
     <div className="main-content">
-      <RelatedProducts
-        products={searchState.products}
-        currentProducts={searchState.filteredProducts}
-        searchQuery={searchState.searchQuery}
-        onProductClick={handleCardClick}
+      <DynamicFilters
+        products={searchState.preSpecFilteredProducts}
+        activeFilters={searchState.filters.specFilters || {}}
+        onFilterChange={(specName, values) => dispatch(setSpecFilter({ specName, values }))}
+        onClearFilters={() => dispatch(clearSpecFilters())}
       />
       <main className="shop-main">
         <div className="shop-header">
