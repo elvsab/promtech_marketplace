@@ -14,7 +14,7 @@ FROM nginx:stable-alpine
 # Копируем только готовый результат из первого этапа
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 # Копируем конфиг Nginx (если нужно)
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 # Команда запуска Nginx уже вшита в образ nginx:stable-alpine, 
