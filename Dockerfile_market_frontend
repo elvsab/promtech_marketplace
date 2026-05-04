@@ -1,8 +1,8 @@
 # 1. Сборка (тяжелая часть)
 FROM node:20-alpine AS build-stage
 # Аргумент для передачи URL API при сборке
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
+ARG VITE_API_PROXY_TARGET
+ENV VITE_API_PROXY_TARGET=$VITE_API_PROXY_TARGET
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
